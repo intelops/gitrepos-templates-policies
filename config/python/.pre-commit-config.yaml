@@ -1,0 +1,63 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0 
+  hooks:
+  # Checks for files that contain merge conflict strings.
+  - id: check-merge-conflict
+  # Detects aws credentials from the aws cli credentials file.
+  - id: detect-aws-credentials
+  # detects the presence of private keys.
+  - id: detect-private-key
+  # Verifies that test files are named correctly.
+  - id: name-tests-test
+  # Trims trailing whitespace in codebase.
+  - id: trailing-whitespace
+
+# Checks your git commit messages for style.
+- repo: https://github.com/jorisroovers/gitlint
+  name: Scan Commit messages
+  rev: main
+  - id: gitlint
+
+# Detects hardcoded secrets, security vulnerabilities and policy breaks using GGShield
+- repo: https://github.com/gitguardian/gg-shield
+  name: Scan Secrets
+  rev: v1.22.0
+  hooks:
+  - id: ggshield
+
+# Python specific Hooks
+# Adds a trailing comma to calls and literals
+- repo: https://github.com/asottile/add-trailing-comma
+  rev: main
+  name: Add tailing comma
+  id: add-trailing-comma
+
+  # Reorders inports
+- repo: https://github.com/asottile/reorder-python-imports
+  rev: main
+  name: Reorder imports
+  id: reorder-python-imports
+
+# Python code formatter
+- repo: https://github.com/psf/black
+  rev: v23.12.1
+  name: Python code formatter
+  id: black
+
+# Scan security issues in Python code.
+- repo: https://github.com/PyCQA/bandit
+  rev: 1.7.6
+  name: Security scanner
+  id: bandit
+
+# Static code analyser for Python
+- repo: https://github.com/PyCQA/pylint
+  rev: v3.0.3
+  name: Python linter
+  id: pylint
+
+
+
+  
+
