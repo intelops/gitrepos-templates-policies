@@ -1,6 +1,0 @@
-# Dockerfile linter
-
-- repo: https://github.com/hadolint/hadolint
-  rev: v2.12.0
-  name: DOckerfile linter
-  id: hadolint
