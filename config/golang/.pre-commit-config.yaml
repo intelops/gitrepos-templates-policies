@@ -6,12 +6,16 @@ repos:
   - id: check-merge-conflict
   # Detects aws credentials from the aws cli credentials file.
   - id: detect-aws-credentials
+    args: [--allow-missing-credentials]
   # detects the presence of private keys.
   - id: detect-private-key
   # Verifies that test files are named correctly.
   - id: name-tests-test
   # Trims trailing whitespace in codebase.
   - id: trailing-whitespace
+  # Protect commit to main branch
+  - id: no-commit-to-branch
+    args: [--branch,main]
 
 # Checks your git commit messages for style.
 - repo: https://github.com/jorisroovers/gitlint

@@ -29,9 +29,9 @@ Pre-commit hooks are automated checks integrated into the version control proces
 Installing the pre-commit framework is straightforward, as outlined in the [official documntation](https://pre-commit.com/#install).It's as simple as executing the command `pip install pre-commit`. Ensure that you have **Python** and **Pip** installed on your local machine.
 
 
-After installing `pre-commit` on your system, developers must create a configuration file to specify which hooks should be triggered during a commit. It should be a *Dotfile* file and be named `.pre-commit-config.yaml` exactly. Templates for this configuration file, tailored to various languages, can be found in the [`./config`](./config/) directory. Developers should select the appropriate language-specific template and place it in the root directory of their project. At present, we provide support for [**Golang**](./config/golang/pre-commit-config.yaml), [**Python**](./config/python/), **JavaScript/NodeJS**,  and **IaC configurations**.
+After installing `pre-commit` on your system, developers must create a configuration file to specify which hooks should be triggered during a commit. It should be a *Dotfile* file and be named `.pre-commit-config.yaml` exactly. Templates for this configuration file, tailored to various languages, can be found in the [`./config`](./config/) directory. Developers should select the appropriate language-specific template and place it in the root directory of their project. At present, we provide support for [**Golang**](./config/golang/pre-commit-config.yaml), [**Python**](./config/python/), **JavaScript/NodeJS**,  and **IaC configurations** for Dockerfile, Terraform, etc.
 
 
 ## TODO
 
-- Add Github Action with pre-merge hooks
+- Add Github Action with *pre-merge* hooks

@@ -12,6 +12,9 @@ repos:
   - id: name-tests-test
   # Trims trailing whitespace in codebase.
   - id: trailing-whitespace
+    # Protect commit to main branch
+  - id: no-commit-to-branch
+    args: [--branch,main]
 
 # Checks your git commit messages for style.
 - repo: https://github.com/jorisroovers/gitlint

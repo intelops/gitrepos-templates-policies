@@ -12,6 +12,9 @@ repos:
   - id: name-tests-test
   # Trims trailing whitespace in codebase.
   - id: trailing-whitespace
+    # Protect commit to main branch
+  - id: no-commit-to-branch
+    args: [--branch,main]
 
 # Checks your git commit messages for style.
 - repo: https://github.com/jorisroovers/gitlint
@@ -20,6 +23,7 @@ repos:
   - id: gitlint
 
 # Detects hardcoded secrets, security vulnerabilities and policy breaks using GGShield
+# We can try out Gitleks as well: https://github.com/gitleaks/gitleaks
 - repo: https://github.com/gitguardian/gg-shield
   name: Scan Secrets
   rev: v1.22.0
