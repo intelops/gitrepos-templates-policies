@@ -1,8 +1,10 @@
 # Dockerfile linter
-
+repos:
 - repo: https://github.com/hadolint/hadolint
   rev: v2.12.0
-  name: DOckerfile linter
-  id: hadolint
+  hooks:
+  - id: hadolint
   # Rules you want to ignore may be found here: https://github.com/hadolint/hadolint?tab=readme-ov-file#rules
-  args: [--ignore,DL3051]
+    name: Dockerfile linter
+    description: Dockerfile linter following best-practices
+    args: [--ignore,DL3051]

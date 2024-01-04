@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.5.0 
+  rev: v4.5.0
   hooks:
   # Checks for files that contain merge conflict strings.
   - id: check-merge-conflict
@@ -9,13 +9,13 @@ repos:
     args: [--allow-missing-credentials]
   # detects the presence of private keys.
   - id: detect-private-key
-  # Verifies that test files are named correctly.
-  - id: name-tests-test
   # Trims trailing whitespace in codebase.
   - id: trailing-whitespace
   # Protect commit to main branch
   - id: no-commit-to-branch
     args: [--branch,main]
+
+
 
 # Checks your git commit messages for style.
 - repo: https://github.com/jorisroovers/gitlint
@@ -25,25 +25,33 @@ repos:
     name: Scan Commit messages
 
 # Detects hardcoded secrets, security vulnerabilities and policy breaks using GGShield
-- repo: https://github.com/gitguardian/gg-shield
-  rev: v1.22.0
+- repo: https://github.com/zricethezav/gitleaks
+  rev: v8.18.1
   hooks:
-  - id: ggshield
-    name: Scan Secrets
+  - id: gitleaks
+    name: Detect hardcoded secrets
+    description: Detect hardcoded secrets using Gitleaks
+    entry: gitleaks protect --verbose --redact --staged
+    language: golang
+    pass_filenames: false
 
-# Golang specific Hooks
-# Enforce a stricter Go format than gofmt
-- repo: https://github.com/mvdan/gofumpt
-  rev: v0.5.0
-  hooks:
-  - id: gofumpt
-    name: Extended Go Format
 
-# Runs unit/integration tests in the repo
-- repo: https://github.com/TekWizely/pre-commit-golang
-  rev: v1.0.0-rc.1
+
+- repo: https://github.com/Bahjat/pre-commit-golang
+  rev: v1.0.3
   hooks:
-  - id: go-test-mod
-    name: Run Tests
-  - id: go-test-pkg
-  # args: [] 
+  # Formats Go code
+  # - id: gofumpt # requires gofumpt to be installed from github.com/mvdan/gofumpt
+  #   name: Go formatter
+  #   description: Runs a strict Go formatter
+  - id: go-fmt-import
+    name: Go formatter
+    description: Go formatter with fmt and imports
+  # Runs Unit tests
+  - id: go-unit-tests
+    name: Run Unit tests
+    desription: Runs all the unit tests in the repo
+    # Runs static analysis of the Go code
+  - id: go-static-check
+    name: Go Static Check
+    description: Finds bugs and performance issues

@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.5.0 
+  rev: v4.5.0
   hooks:
   # Checks for files that contain merge conflict strings.
   - id: check-merge-conflict
@@ -8,8 +8,6 @@ repos:
   - id: detect-aws-credentials
   # detects the presence of private keys.
   - id: detect-private-key
-  # Verifies that test files are named correctly.
-  - id: name-tests-test
   # Trims trailing whitespace in codebase.
   - id: trailing-whitespace
     # Protect commit to main branch
@@ -18,13 +16,44 @@ repos:
 
 # Checks your git commit messages for style.
 - repo: https://github.com/jorisroovers/gitlint
-  name: Scan Commit messages
-  rev: main
+  rev: v0.19.1
+  hooks:
   - id: gitlint
+    name: Scan Commit messages
+
+
+# JavaScript Linter
+- repo: https://github.com/pre-commit/mirrors-eslint
+  rev: v8.5.6
+  hooks:
+  - id: eslint
+    name: ESLint
+    description: Runs ESLint on JavaScript codebase
+    language: node
+    files: \.[jt]sx?$  # *.js, *.jsx, *.ts and *.tsx
+    types: [file]
+    additional-dependencies:
+    - eslint-plugin-react@6.10.3
+
+# Prettier for JavaScript
+- repo: repo: https://github.com/pre-commit/mirrors-prettier
+  rev: v4.0.0-alpha.8
+  hooks:
+  - id: prettier
+    name: Prettier
+    description: JavaScript code formatter
+    files: \.[jt]sx?$  # *.js, *.jsx, *.ts and *.tsx
+    types: [file]
+    additional-dependencies:
+    - prettier@3.1.1
 
 # Detects hardcoded secrets, security vulnerabilities and policy breaks using GGShield
-- repo: https://github.com/gitguardian/gg-shield
-  name: Scan Secrets
-  rev: v1.22.0
+- repo: https://github.com/zricethezav/gitleaks
+  rev: v8.18.1
   hooks:
-  - id: ggshield
+  - id: gitleaks
+    name: Detect hardcoded secrets
+    description: Detect hardcoded secrets using Gitleaks
+    entry: gitleaks protect --verbose --redact --staged
+    language: node
+    pass_filenames: false
