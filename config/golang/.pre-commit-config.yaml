@@ -19,30 +19,31 @@ repos:
 
 # Checks your git commit messages for style.
 - repo: https://github.com/jorisroovers/gitlint
-  name: Scan Commit messages
-  rev:  main
+  rev:  v0.19.1
+  hooks:
   - id: gitlint
+    name: Scan Commit messages
 
 # Detects hardcoded secrets, security vulnerabilities and policy breaks using GGShield
 - repo: https://github.com/gitguardian/gg-shield
-  name: Scan Secrets
   rev: v1.22.0
   hooks:
   - id: ggshield
+    name: Scan Secrets
 
 # Golang specific Hooks
 # Enforce a stricter Go format than gofmt
-- repos: https://github.com/mvdan/gofumpt
-  name: Extended Go Format
+- repo: https://github.com/mvdan/gofumpt
   rev: v0.5.0
   hooks:
   - id: gofumpt
+    name: Extended Go Format
 
 # Runs unit/integration tests in the repo
 - repo: https://github.com/TekWizely/pre-commit-golang
-  name: Run Tests
-  rev: master
+  rev: v1.0.0-rc.1
   hooks:
   - id: go-test-mod
+    name: Run Tests
   - id: go-test-pkg
   # args: [] 
