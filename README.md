@@ -26,10 +26,24 @@ Pre-commit hooks are automated checks integrated into the version control proces
 
 [pre-commit](https://pre-commit.com/) is a framework for managing and maintaining multi-language pre-commit hooks. The pre-commit framework enhances the efficiency of Git hook scripts by automating the detection of common code issues like syntax errors or trailing whitespace prior to code review, allowing reviewers to focus on structural aspects rather than stylistic details. It addresses the challenge of sharing hooks across various projects by providing a multi-language package manager that simplifies the installation and execution of hooks, regardless of the programming language. This system is designed to work without root access and manages dependencies, such as automatically handling the installation of necessary languages or tools (like node for JavaScript files), streamlining the process for developers.
 
-Installing the pre-commit framework is straightforward, as outlined in the [official documntation](https://pre-commit.com/#install).It's as simple as executing the command `pip install pre-commit`. Ensure that you have **Python** and **Pip** installed on your local machine.
+Installing the pre-commit framework is straightforward, as outlined in the [official documntation](https://pre-commit.com/#install).It's as simple as executing the command:
+
+```shell
+$ pip install pre-commit
+```
+
+Ensure that you have **Python** and **Pip** installed on your local machine.
 
 
-After installing `pre-commit` on your system, developers must create a configuration file to specify which hooks should be triggered during a commit. It should be a *Dotfile* file and be named `.pre-commit-config.yaml` exactly. Once, the config file is ready and placed in your projects root, we need to install the hooks in the `./git/hooks` directory of out project. We can do this by passing a simple command `pre-commit install`, and now all the hooks will be triggered when we commit. Few sample templates for this configuration file, tailored to various languages, can be found in the [`./config`](./config/) directory. Developers should select the appropriate language-specific template and place it in the root directory of their project. At present, we provide support for [**Golang**](./config/golang/pre-commit-config.yaml), [**Python**](./config/python/), [**JavaScript/NodeJS**](./config/nodejs/),  and [**IaC configurations**](./config/iac/) for Dockerfile, Terraform, etc.
+After installing `pre-commit` on your system, developers must create a configuration file to specify which hooks should be triggered during a commit. It should be a *Dotfile* file and be named `.pre-commit-config.yaml` exactly. Once, the config file is ready and placed in your projects root, we need to install the hooks in the `./git/hooks` directory of out project. We can do this by passing a simple command:
+
+```shell
+$ pre-commit install
+
+pre-commit installed at .git/hooks/pre-commit  # The output
+``` 
+
+Now, all the hooks will be triggered when we commit. Few sample templates for this configuration file, tailored to various languages, can be found in the [`./config`](./config/) directory. Developers should select the appropriate language-specific template and place it in the root directory of their project. At present, we provide support for [**Golang**](./config/golang/pre-commit-config.yaml), [**Python**](./config/python/), [**JavaScript/NodeJS**](./config/nodejs/),  and [**IaC configurations**](./config/iac/) for Dockerfile, Terraform, etc.
 
 
 ## TODO
