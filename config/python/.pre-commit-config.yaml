@@ -114,6 +114,7 @@ repos:
         if [ ! -f "$DEVCONTAINER_PATH" ]; then
             echo -e "${YELLOW}WARNING: devcontainer.json is missing.${NC}"
             echo "It's recommended to add a devcontainer.json file."
+            exit 1
         else
             echo "devcontainer.json found."
         fi
@@ -166,6 +167,7 @@ repos:
         signed_commit=$(git verify-commit $latest_commit 2>&1)
         if [[ $signed_commit == *"Validated Git signature: true"* ]]; then
             echo "Latest commit is signed with gitsign."
+            exit 0
         else
             echo "WARNING: The latest commit is not signed with gitsign."
         fi
