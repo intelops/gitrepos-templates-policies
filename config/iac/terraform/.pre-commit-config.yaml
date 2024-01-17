@@ -1,16 +1,71 @@
-# Terraform Hooks
 repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0
+  hooks:
+  - id: trailing-whitespace
+    stages: [commit]
+  - id: end-of-file-fixer
+    exclude: /secrets
+    stages: [commit]
+  - id: check-added-large-files
+    stages: [commit]
+  - id: check-yaml
+    args:
+    - '--allow-multiple-documents'
+    exclude: /templates|/secrets
+    stages: [commit]
+  - id: check-json
+    stages: [commit]
+  - id: check-toml
+    stages: [commit]
+  - id: check-shebang-scripts-are-executable
+    stages: [commit]
+# Check is the Commit is Signed off using `--signoff/-s`
+- repo: https://github.com/KAUTH/pre-commit-git-checks
+  rev: v0.0.1 # Use the SHA or tag you want to point to
+  hooks:
+  - id: git-signoff
+    stages: [commit]
+# Detect any hardcoded secerts in configurations
+- repo: https://github.com/zricethezav/gitleaks
+  rev: v8.18.1
+  hooks:
+  - id: gitleaks
+    name: Detect hardcoded secrets
+    description: Detect hardcoded secrets using Gitleaks
+    entry: gitleaks protect --verbose --redact --staged
+    language: system
+    pass_filenames: false
+# Check for commit messages as per https://www.conventionalcommits.org/ 
+- repo: https://github.com/compilerla/conventional-pre-commit
+  rev: v3.1.0
+  hooks:
+  - id: conventional-pre-commit
+    stages: [commit-msg]
+# Format terraform code
 - repo: https://github.com/antonbabenko/pre-commit-terraform
   rev: v1.86.0
   hooks:
   - id: terraform_fmt
-    name: Format terraform code
+    args:
+    - --args=-diff
+    - --args=-write=true
+    stages: [commit]
+  # Generate documentation  
+  - id: terraform_docs
+    name: generate terraform-docs
+    args:
+    - --hook-config=--path-to-file=README.md
+    - --hook-config=--add-to-existing-file=true
+  #Validate Terraform code 
   - id: terraform_validate
     name: Validate Terraform code
-  - id: terraform_tfsec
-    name: Static analysis of Terraform file
-  - id: terraform_trivy
-    name: Terraform scan with Trivytool
     args:
-       - >
-         --args=--format json
+    - --args=-json
+# Check commit signed by gitsign
+- repo: https://github.com/intelops/gitrepos-templates-policies
+  rev: v0.0.1
+  hooks:
+  - id: check-gitsign
+    name: Check GitSign
+    language: system

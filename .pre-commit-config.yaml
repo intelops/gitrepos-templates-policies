@@ -1,0 +1,28 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0
+  hooks:
+  - id: check-yaml
+    name: Verify YAML syntax
+    # args:
+    # - --allow-multiple-documents
+
+- repo: local
+  hooks:
+  - name: Check GitSign
+    id: check-gitsign-sh
+    entry: bash
+    args:
+    - -c
+    - |
+        latest_commit=$(git rev-parse HEAD)
+        signed_commit=$(git verify-commit $latest_commit 2>&1)
+        if [[ $signed_commit == *"Validated Git signature: true"* ]]; then
+            echo "Latest commit is signed with gitsign."
+            exit 0
+        else
+            echo "WARNING: The latest commit is not signed with gitsign."
+        fi
+        exit 1
+    language: system
+    pass_filenames: false

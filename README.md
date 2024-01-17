@@ -43,7 +43,7 @@ $ pre-commit install
 pre-commit installed at .git/hooks/pre-commit  # The output
 ``` 
 
-Now, all the hooks will be triggered when we commit. Few sample templates for this configuration file, tailored to various languages, can be found in the [`./config`](./config/) directory. Developers should select the appropriate language-specific template and place it in the root directory of their project. At present, we provide support for [**Golang**](./config/golang/pre-commit-config.yaml), [**Python**](./config/python/), [**JavaScript/NodeJS**](./config/nodejs/),  and [**IaC configurations**](./config/iac/) for Dockerfile, Terraform, etc.
+Now, all the hooks will be triggered when we commit. Few sample templates for this configuration file, tailored to various languages, can be found in the [`./config`](./config/) directory. Developers should select the appropriate language-specific template and place it in the root directory of their project. At present, we provide support for [**Golang**](./config/golang/pre-commit-config.yaml), [**Python**](./config/python/), [**JavaScript/NodeJS**](./config/nodejs/),  and [**IaC configurations**](./config/iac/) for Dockerfile, Terraform, YAML, and JSON.
 
 
 ## Implementing Sigstore Gitsign in Your Projects
@@ -51,6 +51,13 @@ Now, all the hooks will be triggered when we commit. Few sample templates for th
 At **Intelops**, we advocate for the utilization of **gitsign**, a Sigstore project, for the purpose of signing git commits. Ensuring your git commits are signed is crucial for security reasons. This stems from the ease of attributing a commit to anyone by using the `--author` flag. Such practices can obscure the real source of potentially harmful code. Commit signing verifies the identity of the commit's author.
 
 **Gitsign** by Sigstore offers a solution to this problem, eliminating the need for managing GPG keys. It employs keyless Sigstore technology to sign Git commits, leveraging a verified [OpenID Connect](https://openid.net/connect/) identity. Once Gitsign is installed and set up in your project, committing will prompt a browser authentication process via a supported OpenID provider like GitHub or Google.
+
+
+## Required dependencies 
+
+For hooks specifically for scanning IaC configuration, please ensure the following dependencies are installed locally:
+- [Trivy](https://aquasecurity.github.io/trivy/v0.18.3/installation/)
+- [Tflint](https://github.com/terraform-linters/tflint#installation)
 
 
 ### Installing Gitsign
@@ -103,3 +110,4 @@ Now whenever you sign any commit with `git commit -sm "commit message`, you will
 ## TODO
 
 - Add Github Action with *pre-merge* hooks
+

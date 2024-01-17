@@ -7,4 +7,4 @@ repos:
   # Rules you want to ignore may be found here: https://github.com/hadolint/hadolint?tab=readme-ov-file#rules
     name: Dockerfile linter
     description: Dockerfile linter following best-practices
-    args: [--ignore,DL3051]
+    args: [--ignore, DL3051]
