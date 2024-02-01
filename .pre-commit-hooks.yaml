@@ -3,13 +3,11 @@
   description: Check devcontainer is present for the project
   entry: scripts/check-devcontainer.sh
   language: script
-
 - id: check-dockerfile
   name: Check Dockerfile
   description: Enforce use of Chainguard images in Base images in Dockerfile
   entry: scripts/check-dockerfile.sh
   language: system
-
 - id: check-gitsign
   name: Check gitsign
   description: Check last commit is signed with Sigstore gitsign
