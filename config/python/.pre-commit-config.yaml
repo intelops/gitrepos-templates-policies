@@ -1,0 +1,104 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0
+  hooks:
+  # Checks for files that contain merge conflict strings.
+  - id: check-merge-conflict
+  # Detects aws credentials from the aws cli credentials file.
+  - id: detect-aws-credentials
+    args: [--allow-missing-credentials]
+  # detects the presence of private keys.
+  - id: detect-private-key
+  # Trims trailing whitespace in codebase.
+  - id: trailing-whitespace
+  # Protect commit to main branch
+  - id: no-commit-to-branch
+    args: [--branch,main]
+
+# Python specific Hooks
+# Adds a trailing comma to calls and literals
+- repo: https://github.com/asottile/add-trailing-comma
+  rev: v3.1.0
+  hooks:
+  - id: add-trailing-comma
+    name: Add tailing comma
+
+  # Reorders inports
+- repo: https://github.com/asottile/reorder-python-imports
+  rev: v3.12.0
+  hooks:
+  - id: reorder-python-imports
+    name: Reorder imports
+
+# Python code formatter
+- repo: https://github.com/psf/black
+  rev: 23.12.1
+  hooks:
+  - id: black
+    name: Python code formatter
+
+# Scan security issues in Python code.
+- repo: https://github.com/PyCQA/bandit
+  rev: 1.7.6
+  hooks:
+  - id: bandit
+    name: Security scanner
+
+# Static code analyser for Python
+- repo: https://github.com/PyCQA/pylint
+  rev: v3.0.3
+  hooks:
+  - id: pylint
+    name: Python linter
+
+
+# Check is the Commit is Signed off using `--signoff/-s`
+- repo: https://github.com/KAUTH/pre-commit-git-checks
+  rev: 'v0.0.1'  # Use the SHA or tag you want to point to
+  hooks:
+    - id: git-signoff
+      stages: [commit-msg]
+
+# Checks your git commit messages for style.
+- repo: https://github.com/jorisroovers/gitlint
+  rev:  v0.19.1
+  hooks:
+  - id: gitlint
+    name: Scan Commit messages  
+
+# Detects hardcoded secrets, security vulnerabilities and policy breaks using GGShield
+- repo: https://github.com/zricethezav/gitleaks
+  rev: v8.18.1
+  hooks:
+  - id: gitleaks
+    name: Detect hardcoded secrets
+    description: Detect hardcoded secrets using Gitleaks
+    entry: gitleaks protect --verbose --redact --staged
+    language: golang
+    pass_filenames: false
+
+
+# Local hooks
+# Check for devcontainer.json in the project
+- repo: https://github.com/intelops/gitrepos-templates-policies
+  rev: v0.0.1
+  hooks:
+  - id: check-devcontainer
+    name: Check devcontainer
+    language: system
+
+# Check for Dockerfile in a project
+- repo: https://github.com/intelops/gitrepos-templates-policies
+  rev: v0.0.1
+  hooks:
+  - id: check-dockerfile
+    name: Check Dockerfile
+    language: system
+
+# Check commit signed by gitsign
+- repo: https://github.com/intelops/gitrepos-templates-policies
+  rev: v0.0.1
+  hooks:
+  - id: check-gitsign
+    name: Check GitSign
+    language: system
