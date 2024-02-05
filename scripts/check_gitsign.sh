@@ -14,7 +14,7 @@ if [[ $signed_commit == *"Validated Git signature: true"* ]]; then
 else
     echo "WARNING: The latest commit is not signed with gitsign."
     # Optionally, you can uncomment the next line to block the commit
-    # exit 1
+    exit 1
 fi
 
 exit 0
