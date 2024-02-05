@@ -14,6 +14,7 @@ NC='\033[0m' # No Color
 if [ ! -f "$DEVCONTAINER_PATH" ]; then
     echo -e "${YELLOW}WARNING: devcontainer.json is missing.${NC}"
     echo "It's recommended to add a devcontainer.json file."
+    exit 1
 else
     echo "devcontainer.json found."
 fi
