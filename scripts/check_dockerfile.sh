@@ -11,7 +11,7 @@ check_dockerfile() {
 
         # Check if the base image is from cgr.dev/chianguard
         if [[ $base_image != cgr.dev/chianguard* ]]; then
-            echo "Error: Base image in $1 is not from cgr.dev/chianguard"
+            echo "Error: Base image in $1 is not from cgr.dev/chaianguard"
             return 1
         fi
     fi

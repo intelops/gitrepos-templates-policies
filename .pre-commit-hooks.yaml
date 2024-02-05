@@ -7,9 +7,9 @@
   name: Check Dockerfile
   description: Enforce use of Chainguard images in Base images in Dockerfile
   entry: scripts/check_dockerfile.sh
-  language: system
+  language: script
 - id: check-gitsign
   name: Check gitsign
   description: Check last commit is signed with Sigstore gitsign
   entry: scripts/check_gitsign.sh
-  language: system
+  language: script
