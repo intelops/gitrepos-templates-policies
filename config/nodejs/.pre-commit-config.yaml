@@ -42,17 +42,6 @@ repos:
 #     additional-dependencies:
 #     - eslint-plugin-react@6.10.3
 
-# Prettier for JavaScript
-# - repo: repo: https://github.com/pre-commit/mirrors-prettier
-#   rev: v4.0.0-alpha.8
-#   hooks:
-#   - id: prettier
-#     name: Prettier
-#     description: JavaScript code formatter
-#     files: \.[jt]sx?$  # *.js, *.jsx, *.ts and *.tsx
-#     types: [file]
-#     additional-dependencies:
-#     - prettier@3.1.1
 
 # Detects hardcoded secrets, security vulnerabilities and policy breaks using GGShield
 # - repo: https://github.com/zricethezav/gitleaks
@@ -65,27 +54,22 @@ repos:
 #     language: node
 #     pass_filenames: false
 
-# Local hooks
-# Check for devcontainer.json in the project
 - repo: https://github.com/intelops/gitrepos-templates-policies
   rev: v0.0.1
   hooks:
+    # Check for devcontainer.json in the project
   - id: check-devcontainer
     name: Check devcontainer
-    language: system
-
-# Check for Dockerfile in a project
-- repo: https://github.com/intelops/gitrepos-templates-policies
-  rev: v0.0.1
-  hooks:
+    description: Checks for existance of .devcontainer.json in the project
+    # Check if Dockerfile uses Chainguard base image
   - id: check-dockerfile
     name: Check Dockerfile
-    language: system
-
-# Check commit signed by gitsign
-- repo: https://github.com/intelops/gitrepos-templates-policies
-  rev: v0.0.1
-  hooks:
+    description: Enforce use of Chainguard base images in Dockefiles
+    # Check is last commit is signed using Sigstore gitsign 
   - id: check-gitsign
-    name: Check GitSign
-    language: system
+    name: Check gitsign
+    description: Check if the last commit is signed with Sigstore gitsign
+    # Check if the Dockerfile is present in the project and is a multi-stage Dockerfile
+  - id: check-multistage-dockerfile
+    name: Check multi-stage Dockerfile
+    description: Check the existance of Dockerfile in the project and verify that its a multi-stage Dockerfile

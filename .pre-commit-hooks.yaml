@@ -13,3 +13,8 @@
   description: Check last commit is signed with Sigstore gitsign
   entry: scripts/check_gitsign.sh
   language: script
+- id: check-multistage-dockerfile
+  name: Check multi-stage Dockerfile
+  description: Checks for existance of DOckerfile in the project and verifies if the Dockerfile is a multi-stage
+  entry: scripts/check_multistage_dockerfile.sh
+  language: script

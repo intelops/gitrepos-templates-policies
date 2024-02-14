@@ -96,3 +96,18 @@ repos:
   - id: check-gitsign
     name: Check GitSign
     language: system
+- repo: https://github.com/intelops/gitrepos-templates-policies
+  rev: v0.0.1
+  hooks:
+  - id: check-devcontainer
+    name: Check devcontainer
+    description: Checks for existance of .devcontainer.json in the project
+  - id: check-dockerfile
+    name: Check Dockerfile
+    description: Enforce use of Chainguard base images in Dockefiles
+  - id: check-gitsign
+    name: Check gitsign
+    description: Check if the last commit is signed with Sigstore gitsign
+  - id: check-multistage-dockerfile
+    name: Check multi-stage Dockerfile
+    description: Check the existance of Dockerfile in the project and verify that its a multi-stage Dockerfile
