@@ -16,5 +16,5 @@
 - id: check-multistage-dockerfile
   name: Check multi-stage Dockerfile
   description: Checks for existance of DOckerfile in the project and verifies if the Dockerfile is a multi-stage
-  entry: script/check_multistage_dockerfile.sh
+  entry: scripts/check_multistage_dockerfile.sh
   language: script
