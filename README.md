@@ -69,18 +69,39 @@ You can install Gitsign on your system with the Go installer, or various metods 
 ```shell
 go install github.com/sigstore/gitsign@latest
 ```
-IF you would like to install it on a Linux machine with Debian/Ubuntu:
+If you would like to install it on a Linux machine with Debian/Ubuntu:
 
 ```shell
-wget https://github.com/sigstore/gitsign/releases/download/v0.7.1/gitsign_0.7.1_linux_amd64.deb
-sudo dpkg -i gitsign_0.7.1_linux_amd64.deb
+# Update the version number to be installed 
+wget https://github.com/sigstore/gitsign/releases/download/v0.10.0/gitsign_0.10.0_linux_amd64.deb
+sudo dpkg -i gitsign_0.10.0_linux_amd64.deb
 ```
 
 ### Verifying the installation:
 
 ```shell
-gitsign --version
-gitsign version v0.7.1  # Version of the installed gitsign instance
+ gitsign version
+gitsign version v0.10.0
+parsed config:
+{
+  "Fulcio": "https://fulcio.sigstore.dev",
+  "FulcioRoot": "",
+  "Rekor": "https://rekor.sigstore.dev",
+  "RekorMode": "online",
+  "ClientID": "sigstore",
+  "RedirectURL": "",
+  "Issuer": "https://oauth2.sigstore.dev/auth",
+  "ConnectorID": "",
+  "TokenProvider": "",
+  "TimestampURL": "",
+  "TimestampCert": "",
+  "LogPath": "",
+  "CommitterName": "Santosh Kaluskar",
+  "CommitterEmail": "ksantosh@intelops.dev",
+  "MatchCommitter": false,
+  "Autoclose": true,
+  "AutocloseTimeout": 6
+}
 ```
 
 ### Configuring Git to use gitsign as signing mechanism:
@@ -88,16 +109,16 @@ gitsign version v0.7.1  # Version of the installed gitsign instance
 Once you've successfully installed Gitsign and ensured its functionality on your system, you must configure Git to use Gitsign for signing your commits. This can be done either locally for a specific project or globally, which will apply to commits made from your current system to any project.
 
 **Single Repository (Local Config)**:
+### Commands to be executed inside the project directory for local configuration of gitsign
 
 ```shell
-cd /path/to/my/repository
 git config --local commit.gpgsign true  # Sign all commits
 git config --local tag.gpgsign true  # Sign all tags
 git config --local gpg.x509.program gitsign  # Use Gitsign for signing
 git config --local gpg.format x509  # Gitsign expects x509 args
 ```
 **All Repositories (Global Config)**:
-
+### Commands to be executed for global configuration of gitsign
 ```shell
 git config --global commit.gpgsign true  # Sign all commits
 git config --global tag.gpgsign true  # Sign all tags
